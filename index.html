@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco BV - Quitação de Dívidas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .floating-whatsapp { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+        .pulse-animation { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .trust-badge { background: linear-gradient(45deg, #10b981, #059669); }
+        .security-alert { backdrop-filter: blur(10px); }
+        .calculator-result { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Security Alert Modal -->
+    <div id="securityAlert" class="fixed inset-0 bg-black bg-opacity-50 security-alert flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md mx-4 shadow-2xl">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                    <i class="fas fa-shield-alt text-red-600 text-xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">⚠️ ALERTA DE SEGURANÇA</h3>
+                <div class="text-sm text-gray-600 mb-4">
+                    <p class="mb-2"><strong>CUIDADO COM GOLPES!</strong></p>
+                    <p class="mb-2">Este é o site oficial do Banco BV</p>
+                    <p class="mb-2"><strong>CNPJ:</strong> 01.149.953/0001-89</p>
+                    <p class="mb-2"><strong>Site oficial:</strong> Este domínio</p>
+                    <p class="text-xs text-red-600">Desconfie de outros sites ou números não oficiais</p>
+                </div>
+                <button onclick="closeSecurityAlert()" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                    Entendi, continuar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header gradient-bg text-white fixed w-full top-0 z-40 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Updated logo to new Banco BV image and changed name -->
+                <div class="flex items-center">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/banco%20bv-TsTojISzSxtbPcLGz7tv0og4Q7PtJD.png" alt="Banco BV" class="h-14 w-auto mr-3">
+                    <div>
+                        <span class="text-xl font-bold">Banco BV</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="hover:text-blue-200 transition-colors">Início</a>
+                    <a href="#services" class="hover:text-blue-200 transition-colors">Serviços</a>
+                    <a href="#simulation" class="hover:text-blue-200 transition-colors">Simulação</a>
+                    <a href="#about" class="hover:text-blue-200 transition-colors">Sobre</a>
+                </nav>
+                
+                <a href="https://wa.me/5521964587863?text=Vim%20tirar%20uma%20duvida%20no%20whats" target="_blank" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg transition-colors flex items-center">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    Atendimento
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white pt-20 pb-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="inline-flex items-center bg-white bg-opacity-20 rounded-full px-4 py-2 mb-6">
+                    <i class="fas fa-shield-check mr-2"></i>
+                    <span class="text-sm">Autorizada pelo Banco Central • Desde 2015</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Quite suas <span class="text-yellow-300">Dívidas</span><br>
+                    com até <span class="text-green-300">75% de Desconto</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl mb-8 opacity-90">
+                    Negocie suas dívidas de forma rápida, segura e com as melhores condições do mercado
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#simulation" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105 pulse-animation">
+                        <i class="fas fa-calculator mr-2"></i>
+                        Simular Agora
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trust Indicators -->
+        <div class="container mx-auto px-4 mt-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                    <div class="text-2xl font-bold">8+</div>
+                    <div class="text-sm opacity-80">Anos de Mercado</div>
+                </div>
+                <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                    <div class="text-2xl font-bold">500K+</div>
+                    <div class="text-sm opacity-80">Clientes Atendidos</div>
+                </div>
+                <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                    <div class="text-2xl font-bold">R$ 2B+</div>
+                    <div class="text-sm opacity-80">Negociados</div>
+                </div>
+                <div class="bg-white bg-opacity-10 rounded-lg p-4">
+                    <div class="text-2xl font-bold">95%</div>
+                    <div class="text-sm opacity-80">Satisfação</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos Serviços</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Soluções completas para quitação de dívidas com as melhores condições do mercado</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-handshake text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Renegociação de Dívidas</h3>
+                    <p class="text-gray-600 mb-4">Negocie suas dívidas com descontos de até 75% e condições especiais de pagamento.</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Cartão de crédito</li>
+                        <li>• Financiamentos</li>
+                        <li>• Empréstimos pessoais</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                    <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Consultoria Financeira</h3>
+                    <p class="text-gray-600 mb-4">Orientação especializada para organizar suas finanças e evitar futuras dívidas.</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Planejamento financeiro</li>
+                        <li>• Análise de crédito</li>
+                        <li>• Educação financeira</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Proteção ao Consumidor</h3>
+                    <p class="text-gray-600 mb-4">Defendemos seus direitos e garantimos negociações justas e transparentes.</p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Análise de contratos</li>
+                        <li>• Defesa de direitos</li>
+                        <li>• Suporte jurídico</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulation Section -->
+    <section id="simulation" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Simule sua Quitação</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Preencha os dados abaixo e descubra quanto você pode economizar</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <form id="simulationForm" class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-id-card mr-2 text-blue-600"></i>CPF
+                            </label>
+                            <input type="text" id="cpf" maxlength="14" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="000.000.000-00">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-user mr-2 text-blue-600"></i>Nome Completo
+                            </label>
+                            <input type="text" id="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Seu nome completo">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-phone mr-2 text-blue-600"></i>Telefone
+                            </label>
+                            <input type="text" id="phone" maxlength="15" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="(00) 00000-0000">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-dollar-sign mr-2 text-blue-600"></i>Valor da Dívida
+                            </label>
+                            <input type="text" id="debt-value" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="R$ 0,00">
+                        </div>
+                    </div>
+                    
+                    <!-- Mantendo a calculadora automática -->
+                    <div id="calculatorResult" class="mt-6 calculator-result text-white rounded-lg p-6" style="display: none;">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-calculator mr-2"></i>
+                            Simulação Automática
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <span class="opacity-80">Valor Original:</span>
+                                <div class="font-bold text-lg" id="originalValue">R$ 0,00</div>
+                            </div>
+                            <div>
+                                <span class="opacity-80">Desconto:</span>
+                                <div class="font-bold text-lg" id="discountValue">R$ 0,00</div>
+                            </div>
+                            <div>
+                                <span class="opacity-80">Valor Final:</span>
+                                <div class="font-bold text-xl" id="finalValue">R$ 0,00</div>
+                            </div>
+                            <div>
+                                <span class="opacity-80">Você Economiza:</span>
+                                <div class="font-bold text-xl text-yellow-300" id="savingsAmount">R$ 0,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center">
+                            <i class="fab fa-whatsapp mr-2"></i>
+                            Fazer Simulação
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Por que escolher o Banco BV?</h2>
+                    <p class="text-lg text-gray-600 mb-6">Com mais de 8 anos de experiência no mercado financeiro, somos especialistas em renegociação de dívidas e oferecemos as melhores condições para você quitar seus débitos.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Autorizada pelo Banco Central</h3>
+                                <p class="text-gray-600">Empresa regularizada e fiscalizada pelos órgãos competentes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Descontos de até 75%</h3>
+                                <p class="text-gray-600">Negociamos as melhores condições para sua quitação</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Atendimento Personalizado</h3>
+                                <p class="text-gray-600">Suporte especializado para cada situação</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="text-center p-6 bg-blue-50 rounded-lg">
+                        <div class="text-3xl font-bold text-blue-600 mb-2">500K+</div>
+                        <div class="text-gray-600">Clientes Atendidos</div>
+                    </div>
+                    <div class="text-center p-6 bg-green-50 rounded-lg">
+                        <div class="text-3xl font-bold text-green-600 mb-2">R$ 2B+</div>
+                        <div class="text-gray-600">Em Negociações</div>
+                    </div>
+                    <div class="text-center p-6 bg-purple-50 rounded-lg">
+                        <div class="text-3xl font-bold text-purple-600 mb-2">95%</div>
+                        <div class="text-gray-600">Satisfação</div>
+                    </div>
+                    <div class="text-center p-6 bg-yellow-50 rounded-lg">
+                        <div class="text-3xl font-bold text-yellow-600 mb-2">8+</div>
+                        <div class="text-gray-600">Anos no Mercado</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/emprestimo-bv.jpg-sTuMx1ck1aiaJGGPVatJ4lDXht5YD3.jpeg" alt="Banco BV" class="h-8 w-auto mr-2">
+                        <span class="text-lg font-bold">Banco BV</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Especialistas em renegociação de dívidas desde 2015.</p>
+                    <div class="trust-badge text-white px-3 py-1 rounded-full text-xs inline-block">
+                        <i class="fas fa-shield-check mr-1"></i>
+                        Desde 2015
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Serviços</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Renegociação de Dívidas</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Consultoria Financeira</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Proteção ao Consumidor</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Educação Financeira</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            55 21 96458-7863
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            contato@bvfinanceira.com.br
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            São Paulo - SP
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-building mr-2"></i>
+                            CNPJ: 01.149.953/0001-89
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Redes Sociais</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://wa.me/5521964587863?text=Vim%20tirar%20uma%20duvida%20no%20whats" target="_blank" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-800 rounded-full flex items-center justify-center hover:bg-blue-900 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="text-xs text-gray-500 mb-2">Site Seguro</div>
+                        <div class="flex items-center text-green-400 text-xs">
+                            <i class="fas fa-lock mr-1"></i>
+                            SSL • Dados Protegidos
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2015 Banco BV. Todos os direitos reservados.</p>
+                <p class="text-xs mt-2">Empresa autorizada pelo Banco Central • Dados protegidos por criptografia SSL</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/5521964587863?text=Vim%20tirar%20uma%20duvida%20no%20whats" target="_blank" class="floating-whatsapp">
+        <div class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all transform hover:scale-110 pulse-animation">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </div>
+    </a>
+
+    <!-- SSL Security Badge -->
+    <div class="fixed bottom-20 left-4 z-40">
+        <div class="bg-green-600 text-white px-3 py-2 rounded-lg text-xs shadow-lg">
+            <i class="fas fa-lock mr-1"></i>
+            Site Seguro SSL
+        </div>
+    </div>
+
+    <script>
+        // Close security alert
+        function closeSecurityAlert() {
+            document.getElementById('securityAlert').style.display = 'none';
+        }
+
+        // Form submission
+        document.getElementById('simulationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const cpf = document.getElementById('cpf').value;
+            const phone = document.getElementById('phone').value;
+            const debtValue = document.getElementById('debt-value').value;
+            
+            if (!name || !cpf || !phone || !debtValue) {
+                alert('Por favor, preencha todos os campos!');
+                return;
+            }
+            
+            const numericValue = parseFloat(debtValue.replace(/[R$\s.]/g, '').replace(',', '.'));
+            let discountPercentage;
+            
+            if (numericValue <= 1000) {
+                discountPercentage = 35;
+            } else if (numericValue <= 5000) {
+                discountPercentage = 45;
+            } else if (numericValue <= 10000) {
+                discountPercentage = 55;
+            } else if (numericValue <= 25000) {
+                discountPercentage = 65;
+            } else {
+                discountPercentage = 75;
+            }
+            
+            const discountAmount = numericValue * (discountPercentage / 100);
+            const finalValue = numericValue - discountAmount;
+            const finalValueFormatted = finalValue.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            const discountAmountFormatted = discountAmount.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            
+            const message = `*SIMULAÇÃO DE QUITAÇÃO*%0A%0A*Nome:* ${name}%0A*CPF:* ${cpf}%0A*Telefone:* ${phone}%0A*Valor Original da Dívida:* ${debtValue}%0A*Desconto Aplicado:* ${discountAmountFormatted} (${discountPercentage}%)%0A*VALOR FINAL COM DESCONTO:* ${finalValueFormatted}%0A%0AGostaria de quitar minha dívida com esse desconto especial.%0A%0A_Enviado em: ${new Date().toLocaleString('pt-BR')}_`;
+            
+            window.open(`https://wa.me/5521964587863?text=${message}`, '_blank');
+            
+            alert('Redirecionando para o WhatsApp...');
+            
+            // Clear form
+            document.getElementById('simulationForm').reset();
+            document.getElementById('calculatorResult').style.display = 'none';
+        });
+
+        // CPF mask
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            e.target.value = value;
+        });
+
+        // Phone mask
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{2})(\d)/, '($1) $2');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            e.target.value = value;
+        });
+
+        // Money mask
+        document.getElementById('debt-value').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = (value / 100).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            e.target.value = value;
+            
+            // Calculadora automática
+            calculateDiscount(value);
+        });
+
+        // Função para calcular desconto automático
+        function calculateDiscount(debtValue) {
+            const calculatorResult = document.getElementById('calculatorResult');
+            
+            if (!debtValue || debtValue === 'R$ 0,00') {
+                calculatorResult.style.display = 'none';
+                return;
+            }
+            
+            const numericValue = parseFloat(debtValue.replace(/[R$\s.]/g, '').replace(',', '.'));
+            
+            if (numericValue <= 0) {
+                calculatorResult.style.display = 'none';
+                return;
+            }
+            
+            let discountPercentage;
+            if (numericValue <= 1000) {
+                discountPercentage = 35;
+            } else if (numericValue <= 5000) {
+                discountPercentage = 45;
+            } else if (numericValue <= 10000) {
+                discountPercentage = 55;
+            } else if (numericValue <= 25000) {
+                discountPercentage = 65;
+            } else {
+                discountPercentage = 75;
+            }
+            
+            const discountAmount = numericValue * (discountPercentage / 100);
+            const finalValue = numericValue - discountAmount;
+            
+            document.getElementById('originalValue').textContent = numericValue.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            
+            document.getElementById('discountValue').textContent = 
+                `${discountAmount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} (${discountPercentage}%)`;
+            
+            document.getElementById('finalValue').textContent = finalValue.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            
+            document.getElementById('savingsAmount').textContent = discountAmount.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+            
+            calculatorResult.style.display = 'block';
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-opacity-95');
+            } else {
+                header.classList.remove('bg-opacity-95');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
